@@ -49,6 +49,13 @@ async function run() {
             const myOrders = await cursor.toArray();
             res.send(myOrders);
         });
+        //GET SINGLE Order
+        app.get('/myOrders/:id', async (req, res) => {
+            const id = req.params.id;
+            const query = { _id: ObjectId(id) };
+            const order = await myOrderCollection.findOne(query);
+            res.json(order);
+        });
         // delete order API
         app.delete('/myOrders/:id', async (req, res) => {
             const id = req.params.id;
